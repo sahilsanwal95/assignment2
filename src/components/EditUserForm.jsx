@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getUserById, updateUser } from "../api/reqresApi"; // Import API functions
 import { useParams, useNavigate } from "react-router-dom";
 
-import { getUserById, updateUser } from "../api/reqresApi";
+
 
 
 const EditUserForm = () => {
