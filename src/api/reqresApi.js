@@ -1,18 +1,25 @@
 import axios from "axios";
 
-const API_URL = "https://reqres.in/api"; 
+const API_URL = "https://reqres.in/api";
 
-export const loginUser = async (email, password) => {
-  const response = await axios.post(`${API_URL}/login`, { email, password });
-  return response;
+// ✅ Ensure `getUsers` function is properly exported
+export const getUsers = async (page = 1) => {
+  try {
+    const response = await axios.get(`${API_URL}/users?page=${page}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    return { data: [] }; // Return empty data on error
+  }
 };
 
-export const getUserById = async (id) => {
-  const response = await axios.get(`${API_URL}/users/${id}`);
-  return response.data;
-};
-
-export const updateUser = async (id, userData) => {
-  const response = await axios.put(`${API_URL}/users/${id}`, userData);
-  return response.data;
+// ✅ Ensure `deleteUser` function is properly exported
+export const deleteUser = async (id) => {
+  try {
+    await axios.delete(`${API_URL}/users/${id}`);
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    return { success: false };
+  }
 };
